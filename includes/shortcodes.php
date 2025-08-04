@@ -2,9 +2,11 @@
 // File shortcode placeholder
 
 function immich_album_list_shortcode($atts) {
-    $json_url = 'https://www.bresciavolley.it/IMMICH-ALBUMS/immich_albums.json';
-    $base_url = 'https://cloud-photos.mattiagiudici.eu/share/';
-    $fallback_cover = 'https://www.bresciavolley.it/wp-content/uploads/2025/07/Immagine1-2.png';
+
+	$json_url = get_option('bsv_immich_json_url');
+	$base_url = get_option('bsv_immich_base_url');
+	$base_cover_url = get_option('bsv_immich_base_cover_url');
+	$fallback_cover = get_option('bsv_immich_fallback_cover');
 
     $response = wp_remote_get($json_url);
     $albums = [];
@@ -111,10 +113,10 @@ function immich_album_list_shortcode($atts) {
             $testo = esc_html($raw_title);
         }
 
-        $cover_id = !empty($album['cover']) ? $album['cover'] : null;
-        $cover = $cover_id
-            ? 'https://cloud-photos.mattiagiudici.eu/api/assets/' . $cover_id . '/thumbnail?size=preview&key=' . $code
-            : $fallback_cover;
+		$cover_id = !empty($album['cover']) ? $album['cover'] : null;
+		$cover = $cover_id
+		? $base_cover_url . $cover_id . '/thumbnail?size=preview&key=' . $code
+		: $fallback_cover;
         $url = esc_url($base_url . $code);
 
         $output .= '<div class="card-wrapper">';

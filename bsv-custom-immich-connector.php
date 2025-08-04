@@ -1,8 +1,8 @@
 <?php
-/***
+/**
  * Plugin Name: Bsv Custom Immich Connector
  * Description: Connettore Immich per gestione album fotografici.
- * Version: 1.1f
+ * Version: 1.1.1
  * Author: Mattia Giudici
  * License: GPL2+
  */

@@ -5,6 +5,10 @@ if (!defined('ABSPATH')) exit;
 add_action('admin_init', 'bsv_immich_register_settings');
 function bsv_immich_register_settings() {
     register_setting('bsv_immich_settings_group', 'bsv_immich_fallback_cover');
+	register_setting('bsv_immich_settings_group', 'bsv_immich_json_url');
+register_setting('bsv_immich_settings_group', 'bsv_immich_base_url');
+register_setting('bsv_immich_settings_group', 'bsv_immich_base_cover_url');
+
 }
 
 // Funzione per renderizzare la pagina (usata dal menu BSV)
@@ -24,6 +28,25 @@ function bsv_immich_render_settings_page() {
                         <div><img id="fallback_cover_preview" src="<?php echo esc_url(get_option('bsv_immich_fallback_cover')); ?>" style="max-width:200px; margin-top:10px;"></div>
                     </td>
                 </tr>
+				<tr valign="top">
+    <th scope="row">URL JSON Album</th>
+    <td>
+        <input type="text" name="bsv_immich_json_url" value="<?php echo esc_attr(get_option('bsv_immich_json_url')); ?>" style="width: 100%;" />
+    </td>
+</tr>
+<tr valign="top">
+    <th scope="row">Base URL Album</th>
+    <td>
+        <input type="text" name="bsv_immich_base_url" value="<?php echo esc_attr(get_option('bsv_immich_base_url')); ?>" style="width: 100%;" />
+    </td>
+</tr>
+<tr valign="top">
+    <th scope="row">Base URL Copertine</th>
+    <td>
+        <input type="text" name="bsv_immich_base_cover_url" value="<?php echo esc_attr(get_option('bsv_immich_base_cover_url')); ?>" style="width: 100%;" />
+    </td>
+</tr>
+
             </table>
             <?php submit_button(); ?>
         </form>
